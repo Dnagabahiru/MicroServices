@@ -1,10 +1,46 @@
-# Microservices Architecture
+## Microservices Architecture Diagram
 
-This repository demonstrates a production-style microservices architecture.
+```
+                CLIENT / FRONTEND
+                 (Web / Mobile)
+                        |
+                        v
+                 -----------------
+                 |   API GATEWAY |
+                 | Auth • Routing|
+                 | Rate Limiting |
+                 -----------------
+                        |
+        -----------------------------------------
+        |                   |                   |
+        v                   v                   v
 
-Includes:
-- API Gateway
-- Independent services
-- Database per service
-- Message broker
-- Monitoring & logging
+   -------------      -------------      -------------
+   | USER      |      | ORDER     |      | PAYMENT   |
+   | SERVICE   |      | SERVICE   |      | SERVICE   |
+   | SpringBoot|      | SpringBoot|      | SpringBoot|
+   -------------      -------------      -------------
+        |                   |                   |
+        v                   v                   v
+
+    -----------        -----------        -----------
+    | User DB |        | Order DB|        |Payment DB|
+    -----------        -----------        -----------
+
+            \             |             /
+             \            |            /
+              \           |           /
+               v          v          v
+
+                -----------------------
+                |   MESSAGE BROKER    |
+                |  Kafka / RabbitMQ   |
+                -----------------------
+                          |
+                          v
+                -----------------------
+                | MONITORING & LOGGING|
+                | Prometheus • Grafana|
+                | ELK Stack           |
+                -----------------------
+```
